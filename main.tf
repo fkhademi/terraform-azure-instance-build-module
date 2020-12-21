@@ -2,7 +2,7 @@ resource "azurerm_public_ip" "pub_ip" {
   name                = "${var.name}-pub_ip"
   location            = var.region
   resource_group_name = var.rg
-  allocation_method   = "static"
+  allocation_method   = "Static"
 }
 resource "azurerm_network_interface" "nic" {
   name                = "${var.name}-nic"
