@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "pub_ip" {
-  count = var.public ? 1 : 0
+  count = var.public_ip ? 1 : 0
   name                = "${var.name}-pub_ip"
   location            = var.region
   resource_group_name = var.rg
