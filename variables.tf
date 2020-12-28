@@ -30,3 +30,8 @@ variable "instance_size" {
   type    = string
   default = "Standard_B1ms"
 }
+
+variable "public_ip" {
+  type    = bool
+  default = false
+}

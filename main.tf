@@ -1,4 +1,5 @@
 resource "azurerm_public_ip" "pub_ip" {
+  count = var.public ? 1 : 0
   name                = "${var.name}-pub_ip"
   location            = var.region
   resource_group_name = var.rg
@@ -13,7 +14,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "${var.name}-nic"
     subnet_id                     = var.subnet
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.pub_ip.id
+    public_ip_address_id          = var.public_ip ? azurerm_public_ip.pub_ip.id : null
   }
 }
 
