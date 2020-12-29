@@ -10,5 +10,5 @@ output "nic" {
 
 output "public_ip" {
   description = "The public IP and all of it's attributes"
-  value       = azurerm_public_ip.pub_ip
+  value       = var.public_ip ? azurerm_public_ip.pub_ip[0] : null
 }
