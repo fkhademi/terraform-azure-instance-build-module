@@ -18,6 +18,18 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
+resource "azurerm_network_interface" "lan" {
+  name                = "${var.name}-lan-nic"
+  location            = var.region
+  resource_group_name = var.rg
+
+  ip_configuration {
+    name                          = "${var.name}-lan-nic"
+    subnet_id                     = var.lan_subnet
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
 resource "azurerm_network_security_group" "nsg" {
   name                = "${var.name}-nsg"
   location            = var.region
@@ -41,7 +53,7 @@ resource "azurerm_network_security_group" "nsg" {
     access                     = "Allow"
     protocol                   = "TCP"
     source_port_range          = "*"
-    destination_port_range     = "80"
+    destination_port_range     = "80-82"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
@@ -88,7 +100,7 @@ resource "azurerm_virtual_machine" "instance" {
   name                  = "${var.name}-srv"
   location              = var.region
   resource_group_name   = var.rg
-  network_interface_ids = [azurerm_network_interface.nic.id]
+  network_interface_ids = [azurerm_network_interface.nic.id, azurerm_network_interface.lan.id]
   vm_size               = var.instance_size
 
   delete_os_disk_on_termination    = true
