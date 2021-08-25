@@ -19,9 +19,10 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_network_interface" "lan" {
-  name                = "${var.name}-lan-nic"
-  location            = var.region
-  resource_group_name = var.rg
+  name                 = "${var.name}-lan-nic"
+  location             = var.region
+  resource_group_name  = var.rg
+  enable_ip_forwarding = true
 
   ip_configuration {
     name                          = "${var.name}-lan-nic"
