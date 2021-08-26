@@ -93,10 +93,35 @@ resource "azurerm_network_security_group" "nsg" {
     destination_address_prefix = "*"
   }
 }
+
 resource "azurerm_network_interface_security_group_association" "nsg" {
   network_interface_id      = azurerm_network_interface.nic.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
+
+resource "azurerm_network_security_group" "lan_nsg" {
+  name                = "${var.name}-lan-nsg"
+  location            = var.region
+  resource_group_name = var.rg
+
+  security_rule {
+    name                       = "All"
+    priority                   = 1004
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_network_interface_security_group_association" "lan_nsg" {
+  network_interface_id      = azurerm_network_interface.lan.id
+  network_security_group_id = azurerm_network_security_group.lan_nsg.id
+}
+
 
 resource "azurerm_virtual_machine" "instance" {
   name                         = "${var.name}-srv"
