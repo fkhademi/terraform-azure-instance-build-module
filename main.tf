@@ -113,7 +113,7 @@ resource "azurerm_virtual_machine" "instance" {
   name                         = "${var.name}-srv"
   location                     = var.region
   resource_group_name          = var.rg
-  network_interface_ids        = [azurerm_network_interface.nic.id, azurerm_network_interface.lan.id]
+  network_interface_ids        = [azurerm_network_interface.nic.id]
   primary_network_interface_id = azurerm_network_interface.nic.id
   vm_size                      = var.instance_size
 
