@@ -82,6 +82,28 @@ resource "azurerm_network_security_group" "nsg" {
     destination_address_prefix = "*"
   }
   security_rule {
+    name                       = "IPERF3"
+    priority                   = 1009
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "5201"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+  security_rule {
+    name                       = "IPERF"
+    priority                   = 1010
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "5001"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+  security_rule {
     name                       = "ICMP"
     priority                   = 1008
     direction                  = "Inbound"
