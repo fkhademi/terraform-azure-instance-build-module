@@ -18,10 +18,6 @@ variable "subnet" {
   type = string
 }
 
-variable "lan_subnet" {
-  type = string
-}
-
 variable "ssh_key" {
   type = string
 }
