@@ -5,6 +5,7 @@ resource "azurerm_public_ip" "pub_ip" {
   resource_group_name = var.rg
   allocation_method   = "Static"
   sku                 = "Standard"
+  depends_on          = [azurerm_network_interface.nic]
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -102,6 +103,8 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
+  depends_on = [azurerm_network_interface.nic]
 }
 
 resource "azurerm_network_interface_security_group_association" "nsg" {
