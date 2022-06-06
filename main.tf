@@ -84,20 +84,20 @@ resource "azurerm_network_security_group" "nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "*"
-    source_port_range          = "10.0.0.0/8"
+    source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "*"
+    source_address_prefix      = "10.0.0.0/8"
     destination_address_prefix = "*"
   }
-/*   security_rule {
+  security_rule {
     name                       = "rfc1918b"
     priority                   = 1010
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "*"
-    source_port_range          = "172.16.0.0/12"
+    source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "*"
+    source_address_prefix      = "172.16.0.0/12"
     destination_address_prefix = "*"
   }
   security_rule {
@@ -106,11 +106,11 @@ resource "azurerm_network_security_group" "nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "*"
-    source_port_range          = "192.168.0.0/16"
+    source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "*"
+    source_address_prefix      = "192.168.0.0/16"
     destination_address_prefix = "*"
-  } */
+  }
   security_rule {
     name                       = "Outbound"
     priority                   = 1013
