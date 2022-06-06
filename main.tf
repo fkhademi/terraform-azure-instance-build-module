@@ -89,7 +89,7 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-  security_rule {
+/*   security_rule {
     name                       = "rfc1918b"
     priority                   = 1010
     direction                  = "Inbound"
@@ -110,7 +110,7 @@ resource "azurerm_network_security_group" "nsg" {
     destination_port_range     = "*"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
-  }
+  } */
   security_rule {
     name                       = "Outbound"
     priority                   = 1013
