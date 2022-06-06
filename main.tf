@@ -79,7 +79,7 @@ resource "azurerm_network_security_group" "nsg" {
     destination_address_prefix = "*"
   }
   security_rule {
-    name                       = "RFC1918"
+    name                       = "rfc1918a"
     priority                   = 1009
     direction                  = "Inbound"
     access                     = "Allow"
@@ -90,7 +90,7 @@ resource "azurerm_network_security_group" "nsg" {
     destination_address_prefix = "*"
   }
   security_rule {
-    name                       = "RFC1918-2"
+    name                       = "rfc1918b"
     priority                   = 1010
     direction                  = "Inbound"
     access                     = "Allow"
@@ -101,7 +101,7 @@ resource "azurerm_network_security_group" "nsg" {
     destination_address_prefix = "*"
   }
   security_rule {
-    name                       = "RFC1918"
+    name                       = "rfc1918c"
     priority                   = 1011
     direction                  = "Inbound"
     access                     = "Allow"
