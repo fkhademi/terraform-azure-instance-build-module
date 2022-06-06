@@ -61,7 +61,7 @@ resource "azurerm_network_security_group" "nsg" {
     priority                   = 1007
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "Tcp"
     source_port_range          = "3389"
     destination_port_range     = "*"
     source_address_prefix      = "*"
