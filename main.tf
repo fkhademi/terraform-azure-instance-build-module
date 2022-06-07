@@ -1,11 +1,11 @@
-resource "azurerm_public_ip" "pub_ip" {
+resource "azurerm_public_ip" "default" {
   count = var.public_ip ? 1 : 0
   name                = "${var.name}-pub_ip"
   location            = var.region
   resource_group_name = var.rg
   allocation_method   = "Static"
 }
-resource "azurerm_network_interface" "nic" {
+resource "azurerm_network_interface" "default" {
   name                = "${var.name}-nic"
   location            = var.region
   resource_group_name = var.rg
@@ -14,11 +14,11 @@ resource "azurerm_network_interface" "nic" {
     name                          = "${var.name}-nic"
     subnet_id                     = var.subnet
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = var.public_ip ? azurerm_public_ip.pub_ip[0].id : null #azurerm_public_ip.pub_ip.id
+    public_ip_address_id          = var.public_ip ? azurerm_public_ip.default[0].id : null
   }
 }
 
-resource "azurerm_network_security_group" "nsg" {
+resource "azurerm_network_security_group" "default" {
   name                = "${var.name}-nsg"
   location            = var.region
   resource_group_name = var.rg
@@ -124,16 +124,16 @@ resource "azurerm_network_security_group" "nsg" {
   }
 }
 
-resource "azurerm_network_interface_security_group_association" "nsg" {
-  network_interface_id      = azurerm_network_interface.nic.id
-  network_security_group_id = azurerm_network_security_group.nsg.id
+resource "azurerm_network_interface_security_group_association" "default" {
+  network_interface_id      = azurerm_network_interface.default.id
+  network_security_group_id = azurerm_network_security_group.default.id
 }
 
-resource "azurerm_virtual_machine" "instance" {
+resource "azurerm_virtual_machine" "default" {
   name                  = "${var.name}-srv"
   location              = var.region
   resource_group_name   = var.rg
-  network_interface_ids = [azurerm_network_interface.nic.id]
+  network_interface_ids = [azurerm_network_interface.default.id]
   vm_size               = var.instance_size
 
   delete_os_disk_on_termination    = true
@@ -163,4 +163,7 @@ resource "azurerm_virtual_machine" "instance" {
       key_data = var.ssh_key
     }
   }
+  depends_on = [
+    azurerm_network_interface_security_group_association.default
+  ]
 }
