@@ -3,15 +3,14 @@ Generic terraform module for deploying Linux VM in Azure.
 
 ### Usage Example
 ```
-module "srv1" {
-  source        = "git::https://github.com/fkhademi/terraform-azure-instance-build-module.git?ref=nva0.1"
+  source = "git::https://github.com/fkhademi/terraform-azure-instance-build-module.git?ref=nva0.1"
 
-  name		      = "frey"
+  name            = "frey"
   region          = "North Europe"
-  rg		      = "rg-av-frey-899789"
-  vnet		      = "frey"
+  rg              = "rg-av-frey-899789"
+  vnet            = "frey"
   subnet          = "frey-Public-gateway-subnet-1"
-  ssh_key	      = var.ssh_key
+  ssh_key         = var.ssh_key
   public_ip       = true
   cloud_init_data = ""
 }
