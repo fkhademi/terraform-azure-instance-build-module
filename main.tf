@@ -126,4 +126,7 @@ resource "azurerm_virtual_machine" "default" {
       key_data = var.ssh_key
     }
   }
+  depends_on = [
+    azurerm_network_interface_security_group_association.default, azurerm_network_interface_security_group_association.lan
+  ]
 }
