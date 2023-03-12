@@ -133,6 +133,6 @@ resource "azurerm_virtual_machine" "default" {
     }
   }
   depends_on = [
-    azurerm_network_interface.default, azurerm_network_interface.lan
+    azurerm_network_interface_security_group_association.default, azurerm_network_interface_security_group_association.lan
   ]
 }
