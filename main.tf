@@ -84,7 +84,7 @@ resource "azurerm_network_interface_security_group_association" "default" {
   network_interface_id      = azurerm_network_interface.default.id
   network_security_group_id = azurerm_network_security_group.default.id
   depends_on = [
-    azurerm_virtual_machine.default
+    azurerm_network_interface_security_group_association.default, azurerm_network_interface_security_group_association.lan
   ]
 }
 
@@ -92,7 +92,7 @@ resource "azurerm_network_interface_security_group_association" "lan" {
   network_interface_id      = azurerm_network_interface.lan.id
   network_security_group_id = azurerm_network_security_group.lan.id
   depends_on = [
-    azurerm_virtual_machine.default
+    azurerm_network_interface_security_group_association.default, azurerm_network_interface_security_group_association.lan
   ]
 }
 
